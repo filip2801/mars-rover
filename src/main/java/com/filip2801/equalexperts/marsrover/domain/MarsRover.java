@@ -1,11 +1,13 @@
 package com.filip2801.equalexperts.marsrover.domain;
 
+import static java.util.Objects.requireNonNull;
+
 public final class MarsRover {
 
     private Position position;
 
     public MarsRover(Position position) {
-        this.position = position;
+        this.position = requireNonNull(position);
     }
 
     public void moveForward() {
