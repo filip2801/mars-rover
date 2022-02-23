@@ -79,18 +79,22 @@ public final class MarsRover {
     }
 
     private void moveYPlusOne() {
+        validateNotMaxCoordinate(getPosition().getCoordinates().getY());
         changeYCoordinate(getPosition().getCoordinates().getY() + 1);
     }
 
     private void moveYMinusOne() {
+        validateNotMinCoordinate(getPosition().getCoordinates().getY());
         changeYCoordinate(getPosition().getCoordinates().getY() - 1);
     }
 
     private void moveXPlusOne() {
+        validateNotMaxCoordinate(getPosition().getCoordinates().getX());
         changeXCoordinate(getPosition().getCoordinates().getX() + 1);
     }
 
     private void moveXMinusOne() {
+        validateNotMinCoordinate(getPosition().getCoordinates().getX());
         changeXCoordinate(getPosition().getCoordinates().getX() - 1);
     }
 
@@ -110,6 +114,18 @@ public final class MarsRover {
 
     private void changeDirection(Direction newDirection) {
         this.position = new Position(getPosition().getCoordinates(), newDirection);
+    }
+
+    private void validateNotMaxCoordinate(int coordinateValue) {
+        if (coordinateValue == Integer.MAX_VALUE) {
+            throw new CannotGoFurtherException(getPosition());
+        }
+    }
+
+    private void validateNotMinCoordinate(int coordinateValue) {
+        if (coordinateValue == Integer.MIN_VALUE) {
+            throw new CannotGoFurtherException(getPosition());
+        }
     }
 
     public Position getPosition() {

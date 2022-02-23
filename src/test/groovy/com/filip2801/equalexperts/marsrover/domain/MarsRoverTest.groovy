@@ -60,11 +60,11 @@ class MarsRoverTest extends Specification {
         finalPosition.direction == expectedDirection
 
         where:
-        initialDirection  || expectedDirection
-        Direction.NORTH || Direction.EAST
-        Direction.EAST  || Direction.SOUTH
-        Direction.SOUTH || Direction.WEST
-        Direction.WEST  || Direction.NORTH
+        initialDirection || expectedDirection
+        Direction.NORTH  || Direction.EAST
+        Direction.EAST   || Direction.SOUTH
+        Direction.SOUTH  || Direction.WEST
+        Direction.WEST   || Direction.NORTH
     }
 
     def "should rotate left by 90 degrees when directed to #initialDirection"() {
@@ -81,10 +81,33 @@ class MarsRoverTest extends Specification {
         finalPosition.direction == expectedDirection
 
         where:
-        initialDirection  || expectedDirection
-        Direction.NORTH || Direction.WEST
-        Direction.WEST  || Direction.SOUTH
-        Direction.SOUTH || Direction.EAST
-        Direction.EAST  || Direction.NORTH
+        initialDirection || expectedDirection
+        Direction.NORTH  || Direction.WEST
+        Direction.WEST   || Direction.SOUTH
+        Direction.SOUTH  || Direction.EAST
+        Direction.EAST   || Direction.NORTH
+    }
+
+    def "should throw exception when rover cannot go further to the #direction"() {
+        given:
+        def startingPosition = new Position(coordinates, direction)
+        def marsRover = new MarsRover(startingPosition)
+
+        when:
+        marsRover.moveForward()
+
+        then:
+        def exception = thrown(CannotGoFurtherException)
+        exception.message == "Cannot go further. Current position: " + startingPosition
+
+        and:
+        marsRover.position.coordinates == coordinates
+
+        where:
+        direction       | coordinates
+        Direction.NORTH | new Coordinates(0, Integer.MAX_VALUE)
+        Direction.SOUTH | new Coordinates(0, Integer.MIN_VALUE)
+        Direction.EAST  | new Coordinates(Integer.MAX_VALUE, 0)
+        Direction.WEST  | new Coordinates(Integer.MIN_VALUE, 0)
     }
 }
