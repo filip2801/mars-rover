@@ -79,23 +79,27 @@ public final class MarsRover {
     }
 
     private void moveYPlusOne() {
-        validateNotMaxCoordinate(getPosition().getCoordinates().getY());
-        changeYCoordinate(getPosition().getCoordinates().getY() + 1);
+        int currentY = getPosition().getCoordinates().getY();
+        validateNotMaxCoordinate(currentY);
+        changeYCoordinate(currentY + 1);
     }
 
     private void moveYMinusOne() {
-        validateNotMinCoordinate(getPosition().getCoordinates().getY());
-        changeYCoordinate(getPosition().getCoordinates().getY() - 1);
+        int currentY = getPosition().getCoordinates().getY();
+        validateNotMinCoordinate(currentY);
+        changeYCoordinate(currentY - 1);
     }
 
     private void moveXPlusOne() {
-        validateNotMaxCoordinate(getPosition().getCoordinates().getX());
-        changeXCoordinate(getPosition().getCoordinates().getX() + 1);
+        int currentX = getPosition().getCoordinates().getX();
+        validateNotMaxCoordinate(currentX);
+        changeXCoordinate(currentX + 1);
     }
 
     private void moveXMinusOne() {
-        validateNotMinCoordinate(getPosition().getCoordinates().getX());
-        changeXCoordinate(getPosition().getCoordinates().getX() - 1);
+        int currentX = getPosition().getCoordinates().getX();
+        validateNotMinCoordinate(currentX);
+        changeXCoordinate(currentX - 1);
     }
 
     private void changeYCoordinate(int newYCoordinate) {
