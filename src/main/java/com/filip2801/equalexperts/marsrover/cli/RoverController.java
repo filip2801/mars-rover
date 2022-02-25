@@ -54,14 +54,10 @@ class RoverController {
     }
 
     private void printLastPosition(MarsRover marsRover) {
-        var coordinates = marsRover.getPosition().getCoordinates();
-        print("Mars rover moved to position (" +
-            coordinates.getX() +
-            ", " +
-            coordinates.getY() +
-            ", " +
-            marsRover.getPosition().getDirection() +
-            ")");
+        print("Mars rover moved to position " +
+            marsRover.getPosition().getCoordinates() +
+            " " +
+            marsRover.getPosition().getDirection());
     }
 
     private void print(String s) {

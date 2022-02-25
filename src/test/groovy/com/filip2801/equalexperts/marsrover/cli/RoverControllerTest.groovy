@@ -18,10 +18,10 @@ class RoverControllerTest extends Specification {
         roverController.doMission()
 
         then:
-        1 * cliService.print("Mars rover moved to position (2, 9, WEST)")
+        1 * cliService.print("Mars rover moved to position (2, 9) WEST")
     }
 
-    def "should not move rover further when it reaches max coordinate"() {
+    def "should not move rover further after moving to max coordinate"() {
         given:
         CliService cliService = Mock()
         RoverController roverController = new RoverController(cliService)
@@ -37,7 +37,7 @@ class RoverControllerTest extends Specification {
 
         then:
         1 * cliService.print("Mars rover cannot go further")
-        1 * cliService.print("Mars rover moved to position ($maxCoordinate, 0, EAST)")
+        1 * cliService.print("Mars rover moved to position ($maxCoordinate, 0) EAST")
     }
 
 }
