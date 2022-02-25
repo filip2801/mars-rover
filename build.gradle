@@ -1,11 +1,10 @@
 plugins {
     id 'java'
     id 'groovy'
-
 }
 
 group 'com.filip2801.equalexperts'
-version '1.0-SNAPSHOT'
+version '1.0'
 
 sourceCompatibility = '11'
 
@@ -19,4 +18,12 @@ dependencies {
 
 test {
     useJUnitPlatform()
+}
+
+jar {
+    manifest {
+        attributes(
+                'Main-Class': 'com.filip2801.equalexperts.marsrover.cli.MarsRoverApplication'
+        )
+    }
 }
