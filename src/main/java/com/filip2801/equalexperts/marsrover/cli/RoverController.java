@@ -1,5 +1,6 @@
 package com.filip2801.equalexperts.marsrover.cli;
 
+import com.filip2801.equalexperts.marsrover.domain.CannotGoFurtherException;
 import com.filip2801.equalexperts.marsrover.domain.MarsRover;
 import com.filip2801.equalexperts.marsrover.domain.Position;
 
@@ -20,15 +21,27 @@ class RoverController {
 
         Position startingPosition = getStartingPosition();
         var marsRover = new MarsRover(startingPosition);
+        move(marsRover);
 
-        List<MarsRoverCommand> commands = getCommands();
-        commands.forEach(command -> command.accept(marsRover));
         printLastPosition(marsRover);
-
         print("Goodbye. See you on your next mission!!!");
     }
 
-    private List<MarsRoverCommand> getCommands() {
+    private Position getStartingPosition() {
+        print("Type vehicle position and press Enter. Input format example: (1, 2, NORTH)");
+        return inputInterpreter.readPosition();
+    }
+
+    private void move(MarsRover marsRover) {
+        List<MarsRoverCommand> commands = readCommands();
+        try {
+            commands.forEach(command -> command.accept(marsRover));
+        } catch (CannotGoFurtherException e) {
+            print("Mars rover cannot go further");
+        }
+    }
+
+    private List<MarsRoverCommand> readCommands() {
         print("Available commands:");
         print("F -> Move forward on current heading");
         print("B -> Move backwards on current heading");
@@ -38,11 +51,6 @@ class RoverController {
         print("Type commands for rover and press Enter.");
 
         return inputInterpreter.readCommands();
-    }
-
-    private Position getStartingPosition() {
-        print("Type vehicle position and press Enter. Input format example: (1, 2, NORTH)");
-        return inputInterpreter.readPosition();
     }
 
     private void printLastPosition(MarsRover marsRover) {
