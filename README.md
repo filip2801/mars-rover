@@ -27,3 +27,6 @@ Run `./gradlew build`
 Requirements: built app
 
 Run `java -jar ./build/libs/mars-rover-1.0.jar`
+
+## CI
+Tests running on gitlab for every commit. [here](https://gitlab.com/job-interview-assassements/mars-rover/-/pipelines)
